@@ -129,6 +129,8 @@
 
             this.reset();
 
+            this._createMiddle();
+
             this._eventBind();
         },
 
@@ -138,12 +140,31 @@
             canvas.height = this.elem.offsetHeight;
             canvas._css({
                 position: 'absolute',
-                zIndex: 2
+                zIndex: 2,
+                top: 0,
+                left: 0
             });
             this.elem.appendChild(canvas);
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
             this.offset = canvas._offset();
+        },
+
+        _createMiddle: function() {
+            var div = elem('div');
+            div._css({
+                position: 'absolute',
+                zIndex: 1,
+                color: '#333',
+                textAlign: 'center',
+                lineHeight: this.height + 'px',
+                height: this.height + 'px',
+                width: this.width + 'px',
+                fontSize: '20px',
+                top: 0,
+                left: 0
+            }).innerHTML = this.options.middle;
+            this.elem.appendChild(div);
         },
 
         _eventBind: function() {
