@@ -1,0 +1,26 @@
+{
+  "name": "txbb-scratch",
+  "version": "0.1.0",
+  "authors": [
+    "zhangyang <px.zhangyang@gmail.com>"
+  ],
+  "description": "同学帮帮刮刮卡组件",
+  "main": "txbb-scratch",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "txbb",
+    "scratch",
+    "html5-scratch"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

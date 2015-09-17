@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>刮刮卡组件 同学帮帮</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <script src="../txbb-scratch.js"></script>
+</head>
+<body>
+    <!-- <canvas width="300" height="200" style="background-color:#ccc">您的设备不支持刮刮卡</canvas> -->
+    <div id="J-Scratch" style="width:300px;height:200px;"></div>
+
+    <div id="J-Scratch2" style="width:300px;height:200px;"></div>
+    <script>
+    var instance = Txbb.Scratch.attach(document.getElementById('J-Scratch'), {
+        bg: '#fc0',
+        fg: '#777',
+        middle: '<img src="test.jpg"/>',
+        onEnd: function(){alert('刮完了1');}
+    });
+
+    var instance2 = Txbb.Scratch.attach(document.getElementById('J-Scratch'), {
+        bg: '#ccc',
+        fg: '#bbb',
+        middle: '<img src="test.jpg"/>',
+        onEnd: function(){alert('刮完了2');}
+    });
+
+    var instance3 = Txbb.Scratch.attach(document.getElementById('J-Scratch2'), {
+        middle: '<img src="test.jpg"/>',
+        onEnd: function(){alert('刮完了3');}
+    });
+
+    // 第一个编号是1
+    console.debug(instance.id === 1);
+    // 第二个编号还是1，而且，第二个等于第一个实例
+    console.debug(instance2.id === 1);
+    console.debug(instance === instance2);
+
+    // 容器的背景会为 #ccc, 前景会为 #bbb, 中间的展示数据为一个图片
+    console.debug(instance.options.bg === '#fc0');
+
+
+    console.debug(instance3.id === 2);
+    console.debug(instance3.options.bg === '#f00');
+
+    // instance._clear();
+    //
+    // setTimeout(function(){
+    //     instance2.reset();
+    // }, 3000)
+    // console.debug(instance.elem._addEvent('mousedown  touchstart'))
+
+    </script>
+</body>
+</html>
