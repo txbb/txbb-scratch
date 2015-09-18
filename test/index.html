@@ -10,7 +10,7 @@
 <body>
     <!-- <canvas width="300" height="200" style="background-color:#ccc">您的设备不支持刮刮卡</canvas> -->
     <div id="J-Scratch" style="width:300px;height:200px;"></div>
-
+    <br><br><br>
     <div id="J-Scratch2" style="width:300px;height:200px;"></div>
     <script>
     var instance = Txbb.Scratch.attach(document.getElementById('J-Scratch'), {
@@ -29,7 +29,10 @@
 
     var instance3 = Txbb.Scratch.attach(document.getElementById('J-Scratch2'), {
         middle: '呵呵，3333',
-        onEnd: function(){alert('刮完了3');}
+        onEnd: function(){
+            alert('刮完了3');
+            instance3.reset({onEnd: function() {alert('又刮完了3')}})
+        }
     });
 
     // 第一个编号是1

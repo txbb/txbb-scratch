@@ -126,11 +126,8 @@
             });
 
             this._createCanvas();
-
             this.reset();
-
             this._createMiddle();
-
             this._eventBind();
         },
 
@@ -201,14 +198,18 @@
             });
         },
 
-        reset: function() {
+        reset: function(options) {
+            if (options && typeof options === 'object')
+                this.options = extend(this.options, options);
             this.width = this.canvas.width;
             this.height = this.canvas.height;
+            this.ctx.globalCompositeOperation = 'source-over';
             this.pixels = this.width * this.height;
             this.ctx.fillStyle = this.options.fg;
             this.ctx.beginPath();
             this.ctx.rect(0, 0, this.width, this.height);
             this.ctx.fill();
+            this.ctx.closePath();
         },
 
         _percent: function() {
