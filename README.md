@@ -4,7 +4,7 @@
 
 > 暂时只能用在移动端
 
-![](screenshot.png)
+<img src="screenshot.png" width="320"/>
 
 ## 使用方法
 
