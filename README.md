@@ -20,7 +20,7 @@ var scratchInstance = Txbb.Scratch.attach(element, options);
 需要初始化的 **容器** 元素，canvas 元素会被添加进去。
 
 ```javascript
-var scratchInstance = Txbb.Scratch.attach(document.querySelector('J-Scratch'), options);
+var scratchInstance = Txbb.Scratch.attach(document.querySelector('#J-Scratch'), options);
 ```
 
 ### options
