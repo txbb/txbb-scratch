@@ -2,7 +2,7 @@
  * Txbb.Scratch 组件
  *
  * 同学帮帮移动端刮刮卡组件
- * 0.1.1
+ * 0.1.3
  * by zhangyang
  */
 (function(factory) {
@@ -145,24 +145,29 @@
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
             this.offset = canvas._offset();
-            console.debug(this.offset);
         },
 
         _createMiddle: function() {
-            var div = elem('div');
-            div._css({
-                position: 'absolute',
-                zIndex: 1,
-                color: '#333',
-                textAlign: 'center',
-                lineHeight: this.height + 'px',
-                height: this.height + 'px',
-                width: this.width + 'px',
-                fontSize: '20px',
-                top: 0,
-                left: 0
-            }).innerHTML = this.options.middle;
-            this.elem.appendChild(div);
+            var div;
+            if (this.elem.lastChild.className.indexOf('txbb-scratch-middle') === -1) {
+                div = elem('div', {className : 'txbb-scratch-middle'});
+                div._css({
+                    position: 'absolute',
+                    zIndex: 1,
+                    color: '#333',
+                    textAlign: 'center',
+                    lineHeight: this.height + 'px',
+                    height: this.height + 'px',
+                    width: this.width + 'px',
+                    fontSize: '20px',
+                    top: 0,
+                    left: 0
+                }).innerHTML = this.options.middle;
+                this.elem.appendChild(div);
+            } else {
+                div = this.elem.lastChild;
+                div.innerHTML = this.options.middle;
+            }
         },
 
         _eventBind: function() {
@@ -212,6 +217,8 @@
             this.ctx.rect(0, 0, this.width, this.height);
             this.ctx.fill();
             this.ctx.closePath();
+
+            this._createMiddle();
         },
 
         _percent: function() {
