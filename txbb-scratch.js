@@ -202,6 +202,7 @@
         reset: function(options) {
             if (options && typeof options === 'object')
                 this.options = extend(this.options, options);
+            this.canvas._show();
             this.width = this.canvas.width;
             this.height = this.canvas.height;
             this.ctx.globalCompositeOperation = 'source-over';
@@ -228,6 +229,7 @@
 
         _clear: function() {
             this.ctx.clearRect(0, 0, this.width, this.height);
+            this.canvas._hide();
             if (this.options.onEnd) this.options.onEnd.call(this);
         }
     };
