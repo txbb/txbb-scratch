@@ -94,7 +94,7 @@
         while (dom !== document.body) {
             offset.left += dom.offsetLeft;
             offset.top += dom.offsetTop;
-            dom = dom.parentNode;
+            dom = dom.offsetParent; // 0.1.1 修复 _offset 方法错误
         }
         return offset;
     };
@@ -145,6 +145,7 @@
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
             this.offset = canvas._offset();
+            console.debug(this.offset);
         },
 
         _createMiddle: function() {
