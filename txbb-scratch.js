@@ -191,6 +191,11 @@
                 //start the path for a drag
                 _this.ctx.beginPath();
                 _this.ctx.moveTo(x, y);
+
+                if (_this.options.onStart && !_this.onStartCalled) {
+                    _this.options.onStart.call(this);
+                    _this.onStartCalled = true;
+                }
             })._addEvent('touchmove', function(e) {
                 var x = Math.floor(e.touches[0].pageX - _this.offset.left);
                 var y = Math.floor(e.touches[0].pageY - _this.offset.top);
@@ -219,6 +224,7 @@
             this.ctx.closePath();
 
             this._createMiddle();
+            this.onStartCalled = false;
         },
 
         _percent: function() {
@@ -247,7 +253,8 @@
         fg: '#888',
         middle: '谢谢惠顾，嘿嘿',
         size: 20,
-        onEnd: function(){}
+        onEnd: function(){},
+        onStart: function(){}
     };
 
     return {

@@ -17,6 +17,7 @@
         bg: '#fc0',
         fg: '#777',
         middle: '哈哈哈，11111',
+        onStart: function(){alert('开始刮1')},
         onEnd: function(){alert('刮完了1');}
     });
 
@@ -29,6 +30,7 @@
 
     var instance3 = Txbb.Scratch.attach(document.getElementById('J-Scratch2'), {
         middle: '呵呵，3333',
+        onStart: function(){alert('开始刮3')},
         onEnd: function(){
             alert('刮完了3');
             instance3.reset({onEnd: function() {alert('又刮完了3')}})
