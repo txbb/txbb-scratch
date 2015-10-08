@@ -2,7 +2,7 @@
  * Txbb.Scratch 组件
  *
  * 同学帮帮移动端刮刮卡组件
- * 0.1.4
+ * 0.2.1
  * by zhangyang
  */
 (function(factory) {
