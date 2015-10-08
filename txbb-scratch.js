@@ -2,7 +2,7 @@
  * Txbb.Scratch 组件
  *
  * 同学帮帮移动端刮刮卡组件
- * 0.2.1
+ * 0.2.2
  * by zhangyang
  */
 (function(factory) {
@@ -91,18 +91,33 @@
             top: 0
         };
         var dom = this;
-        while (dom !== document.body) {
+        while (dom && dom !== document.body) {
             offset.left += dom.offsetLeft;
             offset.top += dom.offsetTop;
             dom = dom.offsetParent; // 0.1.1 修复 _offset 方法错误
         }
         return offset;
     };
+    Element.prototype._parents = function() {
+        var parent = this.parentNode;
+        var back = [];
+        while (parent != document.body) {
+            back.push(parent);
+            parent = parent.parentNode;
+        }
+        back.push(document.body);
+        return back;
+    };
 
     /*-------------- 华丽丽的分割线 ---------------*/
 
+    var ua = window.navigator.userAgent;
     // 是否支持 canvas
     var supportCanvas = elem('canvas').getContext;
+    if (!supportCanvas) {
+        alert('您的设备不支持刮刮卡，请及时升级');
+        return;
+    }
     // 实例化后的 Scratch 实例缓存
     var cache = {};
     // 实例序号
@@ -145,6 +160,13 @@
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
             this.offset = canvas._offset();
+
+            // 修复 android 4.1 webview 双重 canvas 错误
+            if (ua.indexOf('534.30') > 0) {
+                this.canvas._parents().forEach(function(item) {
+                   item._css({overflow : 'visible'});
+                });
+            }
         },
 
         _createMiddle: function() {
@@ -182,13 +204,19 @@
                 _this.ctx.strokeStyle = _this.options.color;
                 _this.ctx.lineWidth = _this.options.size;
 
-                //draw single dot in case of a click without a move
                 _this.ctx.beginPath();
                 _this.ctx.arc(x, y, _this.options.size/2, 0, Math.PI*2, true);
+
+                // 修复 android 4.1 webview canvas destination-out 失效错误
+                if (ua.indexOf('534.30') > 0) {
+                    _this.canvas.style.display = 'none';
+                    _this.canvas.offsetHeight;
+                    _this.canvas.style.display = 'inherit';
+                }
+
                 _this.ctx.closePath();
                 _this.ctx.fill();
 
-                //start the path for a drag
                 _this.ctx.beginPath();
                 _this.ctx.moveTo(x, y);
 
