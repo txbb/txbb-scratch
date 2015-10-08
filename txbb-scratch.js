@@ -2,7 +2,7 @@
  * Txbb.Scratch 组件
  *
  * 同学帮帮移动端刮刮卡组件
- * 0.1.3
+ * 0.1.4
  * by zhangyang
  */
 (function(factory) {
@@ -173,8 +173,8 @@
         _eventBind: function() {
             var _this = this;
             _this.canvas._addEvent('touchstart', function(e) {
-                var x = Math.floor(e.touches[0].pageX - _this.offset.left);
-                var y = Math.floor(e.touches[0].pageY - _this.offset.top);
+                var x = Math.floor((e.touches[0].pageX + document.body.scrollLeft) - _this.offset.left);
+                var y = Math.floor((e.touches[0].pageY + document.body.scrollTop) - _this.offset.top);
 
                 _this.ctx.globalCompositeOperation = 'destination-out';
                 _this.ctx.lineJoin = 'round';
