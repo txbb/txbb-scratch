@@ -206,14 +206,6 @@
 
                 _this.ctx.beginPath();
                 _this.ctx.arc(x, y, _this.options.size/2, 0, Math.PI*2, true);
-
-                // 修复 android 4.1 webview canvas destination-out 失效错误
-                if (ua.indexOf('534.30') > 0) {
-                    _this.canvas.style.display = 'none';
-                    _this.canvas.offsetHeight;
-                    _this.canvas.style.display = 'inherit';
-                }
-
                 _this.ctx.closePath();
                 _this.ctx.fill();
 
@@ -227,6 +219,14 @@
             })._addEvent('touchmove', function(e) {
                 var x = Math.floor(e.touches[0].pageX - _this.offset.left);
                 var y = Math.floor(e.touches[0].pageY - _this.offset.top);
+
+                // 修复 android 4.1 webview canvas destination-out 失效错误
+                if (ua.indexOf('534.30') > 0) {
+                    _this.canvas.style.display = 'none';
+                    _this.canvas.offsetHeight;
+                    _this.canvas.style.display = 'inherit';
+                }
+
                 _this.ctx.lineTo(x, y);
                 _this.ctx.stroke();
                 e.preventDefault();
